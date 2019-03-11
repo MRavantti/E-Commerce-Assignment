@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using Dapper;
 using System.Linq;
+using System.Transactions;
 
 namespace E_Commerce
 {
@@ -35,7 +36,19 @@ namespace E_Commerce
         {
             using (var connection = new MySqlConnection(this.connectionString))
             {
-                connection.Execute("INSERT INTO Merchandise (Header, Body) VALUES(@header, @body)", merchandise);
+                connection.Execute("INSERT INTO Merchandise (name, description, price, stock) VALUES(@name, @description, @price, @stock)", merchandise);
+            }
+        }
+
+        public void Delete(int id)
+        {
+            using (TransactionScope scope = new TransactionScope())
+            {
+                using (var connection = new MySqlConnection(this.connectionString))
+                {
+                    connection.Execute("DELETE FROM News WHERE Id = @id", new { id });
+                }
+                scope.Complete();
             }
         }
     }

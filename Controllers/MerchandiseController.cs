@@ -57,19 +57,17 @@ namespace E_Commerce
 
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Delete(int id)
         {
             using (var connection = new SqlConnection(this.connectionString))
             {
-                var merchandiseItem = connection.QuerySingleOrDefault<Merchandise>("SELECT * FROM Merchandise WHERE id = @id", new { id });
+                var result = this.merchendiseService.Delete(id);
 
-                if (merchandiseItem == null)
+                if (!result)
                 {
-                    return NotFound();
+                    return BadRequest();
                 }
-
-                connection.Execute("DELETE FROM Merchandise WHERE Id = @id", new { id });
                 return Ok();
             }
         }

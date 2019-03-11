@@ -19,11 +19,13 @@ namespace E_Commerce
 
         public Merchandise Get(int id)
         {
-            if (id < 1)
+            var merchandise = this.merchandiseRepository.Get(id);
+
+            if (merchandise == null)
             {
                 return null;
             }
-            return this.merchandiseRepository.Get(id);
+            return merchandise;
         }
 
         public bool Add(Merchandise merchandise)
@@ -33,6 +35,18 @@ namespace E_Commerce
                 return false;
             }
             this.merchandiseRepository.Add(merchandise);
+            return true;
+        }
+
+        public bool Delete(int id)
+        {
+            var merchandise = merchandiseRepository.Get(id);
+
+            if (merchandise == null)
+            {
+                return false;
+            }
+            this.merchandiseRepository.Delete(id);
             return true;
         }
     }
