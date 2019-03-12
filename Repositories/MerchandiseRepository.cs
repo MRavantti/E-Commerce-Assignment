@@ -28,7 +28,7 @@ namespace E_Commerce
         {
             using (var connection = new MySqlConnection(this.connectionString))
             {
-                return connection.QuerySingleOrDefault<Merchandise>("SELECT * FROM Merchandise WHERE id = @id", new { id });
+                return connection.QuerySingleOrDefault<Merchandise>("SELECT * FROM Merchandise WHERE id = @id", new { id } );
             }
         }
 
@@ -42,14 +42,10 @@ namespace E_Commerce
 
         public void Delete(int id)
         {
-            using (TransactionScope scope = new TransactionScope())
-            {
                 using (var connection = new MySqlConnection(this.connectionString))
                 {
-                    connection.Execute("DELETE FROM News WHERE Id = @id", new { id });
-                }
-                scope.Complete();
-            }
+                    connection.Execute("DELETE FROM Merchandise WHERE id = @id", new { id } );
+                }    
         }
     }
 }

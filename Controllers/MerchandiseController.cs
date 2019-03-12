@@ -60,8 +60,6 @@ namespace E_Commerce
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Delete(int id)
         {
-            using (var connection = new SqlConnection(this.connectionString))
-            {
                 var result = this.merchendiseService.Delete(id);
 
                 if (!result)
@@ -69,7 +67,7 @@ namespace E_Commerce
                     return BadRequest();
                 }
                 return Ok();
-            }
+            
         }
     }
 }
