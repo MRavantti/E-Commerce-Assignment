@@ -3,15 +3,11 @@ namespace E_Commerce.Models
 {
     public class Products
     {
-        public int id { get; set; }
-        public string pn { get; set; }
-        public int qty { get; set; }
-        public string img { get; set; }
-        public string brand { get; set; }
-        public string model { get; set; }
-        public string category { get; set; }
-        public int price { get; set; }
-        public string desc { get; set; }
-        public string specs { get; set; }
+        public int Id { get; set; }
+        public int Stock { get; set; }
+        public string Image_url { get; set; }
+        public string Name { get; set; }
+        public int Price { get; set; }
+        public string Description { get; set; }
     }
 }

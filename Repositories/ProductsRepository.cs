@@ -1,53 +1,35 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Dapper;
-using MySql.Data.MySqlClient;
 using E_Commerce.Models;
+using MySql.Data.MySqlClient;
 
 namespace E_Commerce.Repositories
 {
-    public class ProductRepository
+    public class ProductsRepository
     {
-        private readonly string connectionString;
+        private string connectionString;
 
-        public ProductRepository(string connectionString)
+        public ProductsRepository(string connectionString)
         {
             this.connectionString = connectionString;
         }
 
         public List<Products> Get()
         {
-            using (var connection = new MySqlConnection(this.connectionString))
+            using (MySqlConnection connection = new MySqlConnection(this.connectionString))
             {
-                var allProducts = connection.Query<Products>("SELECT * FROM Products").ToList();
-                return allProducts;
+                return connection.Query<Products>("SELECT * FROM Products").ToList();
             }
         }
 
-        public Products Get(int id)
+        public List<Products> Get(string id)
         {
-            using (var connection = new MySqlConnection(this.connectionString))
+            using (MySqlConnection connection = new MySqlConnection(this.connectionString))
             {
-                var products = connection.QuerySingleOrDefault<Products>("SELECT * FROM Products WHERE Id = @Id", new { id });
-                return products;
-            };
-        }
-
-        public void Add(Products products)
-        {
-            using (var connection = new MySqlConnection(this.connectionString))
-            {
-                connection.Execute("INSERT INTO Products (Header, Body) VALUES(@header, @body)", products);
+                return connection.Query<Products>("SELECT * FROM Products WHERE Id = @id", new { id }).ToList();
             }
-        }
-
-        public void Delete(int id)
-        {
-            using (var connection = new MySqlConnection(this.connectionString))
-            {
-                connection.Execute("DELETE FROM Products WHERE Id = @Id", new { id });
-
-            };
         }
 
     }

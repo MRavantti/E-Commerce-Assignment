@@ -10,15 +10,27 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="MySql.Data" Version="8.0.15" />
-    <PackageReference Include="Dapper" Version="1.60.1" />
+    <PackageReference Include="Dapper" Version="1.60.6" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Cors" Version="5.2.7" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="Controllers\HomeController.cs" />
+    <Compile Remove="Models\OrderItem.cs" />
+    <Compile Remove="Models\Order.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
     <Folder Include="Models\" />
     <Folder Include="Repositories\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\assets %28copy%29\cartitem.js" />
+    <Content Remove="wwwroot\assets %28copy%29\customer.js" />
+    <Content Remove="wwwroot\assets %28copy%29\index.js" />
+    <Content Remove="wwwroot\assets %28copy%29\order.js" />
+    <Content Remove="wwwroot\assets %28copy%29\product.js" />
+    <Content Remove="wwwroot\assets %28copy%29\style.css" />
+    <Content Remove="E_Commerce.UnitTests\appsettings.json" />
   </ItemGroup>
 </Project>

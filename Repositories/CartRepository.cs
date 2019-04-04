@@ -1,60 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Dapper;
-using E_Commerce.Models;
 using MySql.Data.MySqlClient;
-
+using E_Commerce.Models;
 namespace E_Commerce.Repositories
 {
-    public class ShoppingCartRepository
+    public class CartRepository
     {
-        private readonly string ConnectionString;
+        private readonly string connectionString;
 
-        private readonly ShoppingCartRepository shoppingCartRepository;
-
-        public ShoppingCartRepository(string ConnectionString)
+        public CartRepository(string connectionString)
         {
-            this.ConnectionString = ConnectionString;
+            this.connectionString = connectionString;
         }
 
-        public ShoppingCart Get(int id)
+        public List<Cart> Get(string guid)
         {
-            using (var connection = new MySqlConnection(this.ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(this.connectionString))
             {
-                var cart = connection.QuerySingleOrDefault<ShoppingCart>("SELECT * FROM shoppingCart WHERE shoppingCartId = @id", new { id });
-                if (cart == null)
-                {
-                    connection.Execute("INSERT INTO shoppingCart (id) VALUES (@id)", new { id });
-                    var newCart = connection.QuerySingleOrDefault<ShoppingCart>("SELECT * FROM shoppingCart WHERE shoppingCartId = @id", new { id });
-                    return newCart;
-                }
-                cart.Products = connection
-                    .Query<Products>(
-                        "SELECT * FROM shoppingCartitem sci INNER JOIN products p ON sci.ProductId = p.Id WHERE sci.id = @id",
-                        new { id }).ToList();
-                cart.Price = cart.Products.Sum(item => item.Price);
-                return cart;
+                return connection.Query<Cart>("SELECT Cart_items.Id, Cart_items.Product_id, Cart_guid, Name, Image_url, Price FROM Cart_items LEFT JOIN Products ON Cart_items.Product_id = Products.Id WHERE Cart_guid = @guid", new { guid }).ToList();
             }
         }
 
-        public bool SubmitOrder(Order order)
-        {
-            using (var connection = new MySqlConnection(this.ConnectionString))
-            {
-                var result = connection.Execute(
-                "INSERT INTO submittedorders (CartId, Name, Street, City, ZipCode, Telephone, Email) VALUES (@CartId, @Name, @Street, @City, @ZipCode, @Telephone, @Email)", order);
-
-                var resultOfUpdateCartCompletion = connection.Execute("UPDATE cart SET CartCompleted = 1 WHERE CartId = @CartId", new { order.CartId });
-
-                if (result == 0 || resultOfUpdateCartCompletion == 0)
-                {
-                    return false;
-                }
-
-                return true;
-            }
-
-        }
     }
 }

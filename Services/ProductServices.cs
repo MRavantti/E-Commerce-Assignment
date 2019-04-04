@@ -1,71 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Transactions;
+using System.Web.Http;
 using E_Commerce.Models;
 using E_Commerce.Repositories;
 
 namespace E_Commerce.Services
 {
-    public class ProductService
+    public class ProductsService
     {
-        private ProductRepository productRepository;
+        private ProductsRepository productsRepository;
 
-        public ProductService(ProductRepository productRepository)
+        public ProductsService(ProductsRepository productsRepository)
         {
-            this.productRepository = productRepository;
+            this.productsRepository = productsRepository;
         }
 
-        public List<Product> Get()
+        public List<Products> Get()
         {
-            return productRepository.Get();
+            return this.productsRepository.Get();
         }
 
-        public Product Get(int id)
+        public List<Products> Get(string key)
         {
-            if (id < 1)
-            {
-                return null;
-            }
-            return productRepository.Get(id);
-
-        }
-
-        public int Add(Product product)
-        {
-            //Add more conditions and error messages
-            if (string.IsNullOrEmpty(product.Name))
-            {
-                return 0;
-            }
-            if (string.IsNullOrEmpty(product.Description))
-            {
-                return 0;
-            }
-            if (product.Price < 0)
-            {
-                return 0;
-            }
-
-            return this.productRepository.Add(product);
-        }
-
-        public bool Delete(int id)
-        {
-            if (id < 0)
-            {
-                return false;
-            }
-            using (TransactionScope scope = new TransactionScope())
-            {
-                var deleteItem = this.productRepository.Get(id);
-                if (deleteItem == null)
-                {
-                    return false;
-                }
-                this.productRepository.Delete(id);
-                scope.Complete();
-            }
-            return true;
+            return this.productsRepository.Get(key);
         }
     }
 }

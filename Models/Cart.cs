@@ -1,15 +1,12 @@
-﻿
-using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace E_Commerce.Models
+﻿namespace E_Commerce.Models
 {
-    public class ShoppingCartItem
+    public class Cart
     {
-        public int CartItemId { get; set; }
-
-        public int CartId { get; set; }
-
-        public int ProductId { get; set; }
+        public int Id { get; set; }
+        public int Product_id { get; set; }
+        public int Cart_id { get; set; }
+        public string Name { get; set; }
+        public string Image_url { get; set; }
+        public int Price { get; set; }
     }
 }
