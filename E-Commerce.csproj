@@ -18,6 +18,7 @@
     <Compile Remove="Controllers\HomeController.cs" />
     <Compile Remove="Models\OrderItem.cs" />
     <Compile Remove="Models\Order.cs" />
+    <Compile Remove="E-Commerce.UnitTests\Services\ProductsRepositoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
@@ -32,5 +33,14 @@
     <Content Remove="wwwroot\assets %28copy%29\product.js" />
     <Content Remove="wwwroot\assets %28copy%29\style.css" />
     <Content Remove="E_Commerce.UnitTests\appsettings.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="E-Commerce.UnitTests\obj\Debug\netcoreapp2.2\E-Commerce.UnitTests.assets.cache" />
+    <None Remove="E-Commerce.UnitTests\bin\Debug\netcoreapp2.2\E-Commerce.dll" />
+    <None Remove="E-Commerce.UnitTests\obj\Debug\netcoreapp2.2\E-Commerce.UnitTests.csprojAssemblyReference.cache" />
+    <None Remove="E-Commerce.UnitTests\obj\Debug\netcoreapp2.2\E-Commerce.UnitTests.csproj.CoreCompileInputs.cache" />
+    <None Remove="E-Commerce.UnitTests\obj\Debug\netcoreapp2.2\E-Commerce.UnitTests.dll" />
+    <None Remove="E-Commerce.UnitTests\obj\Debug\netcoreapp2.2\E-Commerce.UnitTests.pdb" />
+    <None Remove="E-Commerce.UnitTests\obj\Debug\netcoreapp2.2\E-Commerce.UnitTests.csproj.FileListAbsolute.txt" />
   </ItemGroup>
 </Project>

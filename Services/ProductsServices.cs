@@ -8,9 +8,9 @@ namespace E_Commerce.Services
 {
     public class ProductsService
     {
-        private ProductsRepository productsRepository;
+        private IProductsRepository productsRepository;
 
-        public ProductsService(ProductsRepository productsRepository)
+        public ProductsService(IProductsRepository productsRepository)
         {
             this.productsRepository = productsRepository;
         }

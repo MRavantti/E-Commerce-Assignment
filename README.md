@@ -30,7 +30,7 @@ In this project, the assignment was to create an E-Commerce. Created with `Visua
 - Clone the repository.
 
 ```sh
-$ git clone https://github.com/MRavantti/Photogram.git
+$ git clone https://github.com/MRavantti/E-Commerce-Assignment.git
 ```
 - start the `E-Commerce.csproj` with `Visual Studio`
 
