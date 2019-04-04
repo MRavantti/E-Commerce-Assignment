@@ -1,0 +1,24 @@
+.productsContainer {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.productBox {
+  margin: 10px;
+  border: 1px solid black;
+  padding: 5px;
+  background: aqua;
+}
+
+.info {
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+}
+
+.img {
+  max-width: 500px;
+  max-height: 150px;
+}

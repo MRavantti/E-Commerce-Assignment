@@ -1,0 +1,28 @@
+.cart-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.lol {
+  display: flex;
+  flex-direction: row;
+}
+
+.button {
+  margin: 10px;
+  margin-bottom: 100px;
+  width: 100px;
+  height: 86px;
+}
+
+.cart-img {
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.cart-box {
+  margin: 10px;
+  border: 1px solid black;
+  padding: 5px;
+  background: aqua;
+}
